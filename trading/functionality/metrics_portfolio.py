@@ -1,4 +1,3 @@
-from collections import OrderedDict
 from warnings import warn
 import numpy as np
 import matplotlib.pyplot as plt
@@ -92,7 +91,7 @@ class BacktestUtility:
         :return: OrderedDict. Deal summary with measure names as keys.
         """
         deal_delta = np.diff(self.deals)
-        out = OrderedDict({'n_deals': len(deal_delta)})
+        out = {'n_deals': len(deal_delta)}
         deal_rev = deal_delta / self.deals[:-1]
         deals_neg = deal_rev[deal_rev < 0]
         deals_pos = deal_rev[deal_rev > 0]
@@ -108,8 +107,8 @@ class BacktestUtility:
         """
         xfmt = md.DateFormatter('%Y-%m-%d')
         
-        dates=[datetime.fromtimestamp(ts) for ts in self.times]
-        datenums=md.date2num(dates)
+        dates = [datetime.fromtimestamp(ts) for ts in self.times]
+        datenums = md.date2num(dates)
         
         plt.figure(figsize=figsize)
         if log_scale:
@@ -160,7 +159,7 @@ class BacktestUtility:
         Returns all summary stats.
         :return: OrderedDict. A collection of all summary stats.
         """
-        out = OrderedDict({'total_returns': self.get_revenue()})
+        out = {'total_returns': self.get_revenue()}
         deals_summary = self.get_deals_summary()
         for item in deals_summary:
             out[item] = deals_summary[item]
